@@ -4,8 +4,8 @@ migrate:
 init:
 	npm install
 
-populate:
-	node --env-file=.env populateDB.js
+generate:
+	node --env-file=.env generateEvents.js
 
 consume:
 	node --env-file=.env consume.js

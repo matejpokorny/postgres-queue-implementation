@@ -1,26 +1,15 @@
-import { Client } from "pg";
+import pg from "pg";
 
-export function getDb() {
-  const client = new Client({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS
+export default async function getDb() {
+  const client = new pg.Client({
+    host: process.env.POSTGRES_HOST,
+    port: process.env.POSTGRES_PORT,
+    database: process.env.POSTGRES_DB,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
   });
 
-  client.connect();
-
-  // create database if not exists
-  client.query("CREATE DATABASE IF NOT EXISTS " + process.env.DB_NAME + ";", (err, res) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Database testdb created");
-    }
-  });
-
-  client.end();
+  await client.connect();
 
   return client;
 }

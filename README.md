@@ -12,6 +12,12 @@ as a queue backend. The idea is to use the `SKIP LOCKED`
  ```bash
  docker run --name postgres -e POSTGRES_PASSWORD=postgres -d postgres
  ```
+
+Create a database in the container:
+
+ ```bash
+ docker exec -it postgres psql -U postgres -c "CREATE DATABASE queue_db;"
+ ```
    
 2. Create a .env file containing database credentials
 
@@ -29,10 +35,10 @@ as a queue backend. The idea is to use the `SKIP LOCKED`
 make migrate
 ```
 
-4. Start the populate script to put messages to queue
+4. Start the generate script to put messages to queue
 
  ```commandline
- make populate
+ make generate
  ```
 
 5. Start the worker to consume messages from queue
