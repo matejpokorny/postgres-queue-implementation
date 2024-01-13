@@ -14,7 +14,7 @@ async function pushMessagesToQueue() {
   try {
     const db = await getDb();
 
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 100; i++) {
       const message = generateRandomMessage();
       await db.query({
         text: `INSERT INTO queue (header, body) VALUES ($1, $2)`,
@@ -29,7 +29,7 @@ async function pushMessagesToQueue() {
   }
 }
 
-// push 10x1000 messages to the queue in parallel
+// push 10x100 messages to the queue in parallel
 Promise.all([
   pushMessagesToQueue(),
   pushMessagesToQueue(),
