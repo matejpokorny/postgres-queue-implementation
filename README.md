@@ -3,9 +3,11 @@
 ## Goal
 
 The goal of this project is to try to use postgres
-as a queue backend. The idea is to use the `SKIP LOCKED`.
+as a queue backend. The idea is to use the `SKIP LOCKED` feature
+of postgres to implement locking of messages and processing every message
+exactly once.
 
-The consumer script should process every message exactly once, remove it
+The consumer script should process every message, remove it
 from the queue, sort it by topic and store in table for the topic.
 
 The final sum of items in topics tables should equal number of messages in queue.
