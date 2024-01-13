@@ -23,13 +23,13 @@ async function pushMessagesToQueue() {
     }
 
     await db.end();
-    console.log("Messages pushed to the queue successfully.");
   } catch (error) {
     console.error("Error pushing messages to the queue:", error);
   }
 }
 
 // push 10x100 messages to the queue in parallel
+console.log("Starting to push messages to the queue with 10 workers...");
 Promise.all([
   pushMessagesToQueue(),
   pushMessagesToQueue(),

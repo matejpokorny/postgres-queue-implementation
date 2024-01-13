@@ -10,6 +10,16 @@ from the queue, sort it by topic and store in table for the topic.
 
 The final sum of items in topics tables should equal number of messages in queue.
 
+## Result
+
+Processing 1000 messages with 5 async workers:
+
+![async_processing](./img/async-processing.png)
+
+Processing 1000 messages using 5 processes with 5 async workers each:
+
+![parallel_processing](./img/parallel-processing.png)
+
 ## Usage
 
 1. Get a postgres database, e.g. using docker:
@@ -46,8 +56,25 @@ make migrate
 make generate
 ```
 
+To generate more messages in parallel, run
+    
+```commandline
+make generate-parallel
+```
+
 5. Start the worker to consume messages from queue
 
 ```commandline
 make consume
+```
+To consume more messages in parallel, run
+
+```commandline
+make consume-parallel
+```
+
+6. Clean the database for next run
+
+```commandline
+make clean
 ```
