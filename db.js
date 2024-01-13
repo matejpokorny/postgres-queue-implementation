@@ -1,6 +1,6 @@
 import pg from "pg";
 
-export default async function getDb() {
+export async function getDb() {
   const client = new pg.Client({
     host: process.env.POSTGRES_HOST,
     port: process.env.POSTGRES_PORT,
@@ -12,4 +12,22 @@ export default async function getDb() {
   await client.connect();
 
   return client;
+}
+
+export async function countMessagesInQueue() {
+  try {
+    const db = await getDb();
+
+    db.query({
+      text: `SELECT COUNT(*) FROM queue`,
+    })
+      .then((res) => {
+        console.log("Messages in the queue:", res.rows[0].count);
+      })
+      .finally(() => {
+        db.end();
+      });
+  } catch (error) {
+    console.error("Error counting messages in the queue:", error);
+  }
 }

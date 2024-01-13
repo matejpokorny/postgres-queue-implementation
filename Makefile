@@ -8,4 +8,4 @@ generate:
 	node --env-file=.env generateEvents.js
 
 consume:
-	node --env-file=.env consume.js
+	node --env-file=.env app.js

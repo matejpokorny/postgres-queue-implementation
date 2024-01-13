@@ -1,4 +1,4 @@
-import getDb from "./db.js";
+import { getDb, countMessagesInQueue } from "./db.js";
 
 function generateRandomMessage() {
   const topics = ["topic1", "topic2"];
@@ -26,24 +26,6 @@ async function pushMessagesToQueue() {
     console.log("Messages pushed to the queue successfully.");
   } catch (error) {
     console.error("Error pushing messages to the queue:", error);
-  }
-}
-
-async function countMessagesInQueue() {
-  try {
-    const db = await getDb();
-
-    db.query({
-      text: `SELECT COUNT(*) FROM queue`,
-    })
-      .then((res) => {
-        console.log("Messages in the queue:", res.rows[0].count);
-      })
-      .finally(() => {
-        db.end();
-      });
-  } catch (error) {
-    console.error("Error counting messages in the queue:", error);
   }
 }
 
